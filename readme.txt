@@ -26,10 +26,34 @@ Approach to the problem / things to define.
 
 // Questions for River.pl implementation: 
 1) * make sure to describe your state representation detail: how are you representing your states? what does each element represent? what values can those variables have?
+      A state can be represented as west(WW,VW, Boat) and east (WE, VE, Boat) 
+         - WW/WE Number of werewolves, the W and E denote which side. 
+         - VW/VE Number of vampires, the W and E denote which side 
+         - Boat  A Boolean which can we true or false depending on where the boat is
+      Examples: 
+          west(0,0,false), east(3,3,true)   // Three werewolves and vampires on the east as well as the boat
+          west(2,2,true),  east(1,1,false)  // Two WW and Vampires on the west with the boat. One WW and One Vampire on the east without the boat 
+
+      Variables: 
+          VW, VE, WW, WE, are all integer values ranging from 0 -> 3. 
+          Boat is a Boolean and will be written as true or false, in accordance to the boats current position at a state
 
 2) * how did you come up with your move rules? did you check if it is enough to cover the state space? did you come up with a clever trick to reduce the number of move rules?
+    Coming up with moves: 
+        - A boat can take 1 or two people, *Never 3!
+        - We have two types of people 
+        - We have two ways to boat can travel
+        - Therefore, there are five combinations of people who can be in a boat. (1 or 2 werewolves, 1 or 2 vampires, or 1 vampire and 1 werewolf) = 5 moves. 
+        - We can travel in two directions so 5 moves * 2 directions = 10 possible moves to define. These moves are commented in my River.pl file :) 
+        - I did not use a clever trick, in hindsight maybe I could have used some property of symmetry to only define five moves, but I defined all ten. 
 
 3) * provide detailed instructions on how to run and evaluate your Prolog code; 
+        - How I ran the code: 
+            - Log into moons or another cs machine, make sure to have my River.pl file
+            - Type 'swipl', this will open prolog
+            - Type [River]. to access my prolog file
+            - Type 'start.' to run the method, a path will be printed with the solution 
+            - ** Note you can also type 'solve.' instead of 'start.' either works :) ** 
 
 
 BLACK AND WHITE TILE PROBLEM: 
