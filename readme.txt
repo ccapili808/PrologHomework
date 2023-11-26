@@ -51,9 +51,26 @@ Approach to the problem / things to define.
         - How I ran the code: 
             - Log into moons or another cs machine, make sure to have my River.pl file
             - Type 'swipl', this will open prolog
-            - Type [River]. to access my prolog file
+            - Type ['River.pl']. to access my prolog file
+                  - on moons '[River].' didn't work for me and I had to use '['River.pl'].'
+                  - If '['River.pl'].' doesn't work for some reason let me know, or try '[River].'
             - Type 'start.' to run the method, a path will be printed with the solution 
             - ** Note you can also type 'solve.' instead of 'start.' either works :) ** 
+
+            - My assignment defines the initial state and goal states, it does not take inputs in. 
+            - Once running you should get the output: 
+            state(west(0,0,false),east(3,3,true))
+            state(west(2,0,true),east(1,3,false))
+            state(west(1,0,false),east(2,3,true))
+            state(west(3,0,true),east(0,3,false))
+            state(west(2,0,false),east(1,3,true))
+            state(west(2,2,true),east(1,1,false))
+            state(west(1,1,false),east(2,2,true))
+            state(west(1,3,true),east(2,0,false))
+            state(west(0,3,false),east(3,0,true))
+            state(west(2,3,true),east(1,0,false))
+            state(west(1,3,false),east(2,0,true))
+            state(west(3,3,true),east(0,0,false))
 
 
 BLACK AND WHITE TILE PROBLEM: 
