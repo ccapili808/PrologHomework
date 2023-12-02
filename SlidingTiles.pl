@@ -31,17 +31,18 @@ deciding which moves are valid
 */
 
 
-sum_Bs_before_Ws(List, Total) :- sum_Bs_before_Ws(List, List, 0, Total).
-sum_Bs_before_Ws([], _, Total, Total).
-sum_Bs_before_Ws(['W'|Tail], FullList, CurrentSum, Total) :-
-        count_Bs_before_W(FullList, Tail, 0, BsCount),
+sumTilesOutOfPlace(List, Total) :- sumTilesOutOfPlace(List, List, 0, Total).
+sumTilesOutOfPlace([], _, Total, Total).
+sumTilesOutOfPlace(['W'|Tail], FullList, CurrentSum, Total) :-
+        tilesOutOfPlace(FullList, Tail, 0, BsCount),
         NewSum is CurrentSum + BsCount,
-        sum_Bs_before_Ws(Tail, FullList, NewSum, Total).
+        sumTilesOutOfPlace(Tail, FullList, NewSum, Total).
 
-sum_Bs_before_Ws([_|Tail], FullList, CurrentSum, Total) :-
-        sum_Bs_before_Ws(Tail, FullList, CurrentSum, Total).
+sumTilesOutOfPlace([_|Tail], FullList, CurrentSum, Total) :-
+        sumTilesOutOfPlace(Tail, FullList, CurrentSum, Total).
 
-count_Bs_before_W(FullList, Tail, CurrentCount, Count) :-
+% Given a Tile 'W', check how many 'B' are to the left of it. 
+tilesOutOfPlace(FullList, Tail, CurrentCount, Count) :-
         append(Head, Tail, FullList),
         findall(X, (member(X, Head), X = 'B'), Bs),
         length(Bs, BsLength),
@@ -89,15 +90,15 @@ swap_hop_two(State, Child) :-
 
 find_best_child([Child], Child).
 find_best_child([Child1, Child2 | Rest], BestChild) :-
-        sum_Bs_before_Ws(Child1, Heuristic1),
-        sum_Bs_before_Ws(Child2, Heuristic2),
+        sumTilesOutOfPlace(Child1, Heuristic1),
+        sumTilesOutOfPlace(Child2, Heuristic2),
         (Heuristic1 =< Heuristic2 -> BetterChild = Child1; BetterChild = Child2),
         find_best_child([BetterChild | Rest], BestChild).
 
 
 % Recursively call the find best child method, printing the steps we take.
 greedy_search(State) :-
-        sum_Bs_before_Ws(State, Heuristic),
+        sumTilesOutOfPlace(State, Heuristic),
         (Heuristic = 0 -> print('Goal State Reached: '), print_list(State);
         generate_children(State, Children),
         find_best_child(Children, BestChild),
