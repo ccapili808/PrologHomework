@@ -1,5 +1,4 @@
 /*
-
 Example State: 
 There will always be an array of 7, with three white and black tiles each, ' _ ' for the empty square. 
 [B,B,B,_,W,W,W]
@@ -23,7 +22,7 @@ sum of the number of B tiles to the left of each white tile.
 Chose heuristic values which lead us closer to 0, stop when this heursitic is zero. 
 We have 140 possible states, so brute force may be possible!
 
-search method: We have 140 possible states, so it 
+search method: Greedy Search
 
 a way to print each state that has been visited 
 
@@ -105,7 +104,7 @@ greedy_search(State) :-
         print('Chosen Child: '), print_list(BestChild), nl,
         greedy_search(BestChild)).
 
-%General Print statements
+% General Print statements
 print_list([]) :- nl.
 print_list([H|T]) :-
             write(H), write(' '),
@@ -113,6 +112,10 @@ print_list([H|T]) :-
 
 print_children(Children) :-
         print_list(Children).
+
+initState(['B', 'B', 'B', '_', 'W', 'W', 'W']).
+start :- initState(InitialState),
+         greedy_search(InitialState).
 
 
 
