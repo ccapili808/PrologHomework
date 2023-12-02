@@ -120,7 +120,7 @@ How to Run:
 
   - Log into moons or another cs machine, make sure to have my in your directory SlidingTiles.pl file 
             - Type 'swipl', this will open prolog
-            - Type [SlidingTiles]. to access my prolog file
+            - Type ['SlidingTiles.pl']. to access my prolog file
             - Type 'start.' to run the method, a path will be printed with the solution 
             - My assignment defines the initial state and goal states, it does not take inputs in. 
 
