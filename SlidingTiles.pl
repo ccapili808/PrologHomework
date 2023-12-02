@@ -54,25 +54,25 @@ generate_children(State, Children) :-
         findall(Child, (valid_move(State, Child), Child \= State), Children).
 
 valid_move(State, Child) :-
-        swap_adjacent(State, Child);
-        swap_hop_one(State, Child);
-        swap_hop_two(State, Child).
+        swapAdj(State, Child);
+        jumpOne(State, Child);
+        jumpTwo(State, Child).
 
 % Swap with adjacent tile (both directions)
-swap_adjacent(State, Child) :-
+swapAdj(State, Child) :-
         (append(Prefix, ['_', Tile | Suffix], State); append(Prefix, [Tile, '_' | Suffix], State)),
         member(Tile, ['B', 'W']),
         (append(Prefix, [Tile, '_' | Suffix], Child); append(Prefix, ['_', Tile | Suffix], Child)).
 
-% Swap by hopping over one tile (both directions)
-swap_hop_one(State, Child) :-
+% Swap by hopping over one tile into the empty square (both directions)
+jumpOne(State, Child) :-
         (append(Prefix, ['_', X, Tile | Suffix], State); append(Prefix, [Tile, X, '_' | Suffix], State)),
         member(Tile, ['B', 'W']),
         member(X, ['B', 'W']),
         (append(Prefix, [Tile, X, '_' | Suffix], Child); append(Prefix, ['_', X, Tile | Suffix], Child)).
 
-% Swap by hopping over two tiles (both directions)
-swap_hop_two(State, Child) :-
+% Swap by hopping over two tiles into the empty square (both directions)
+jumpTwo(State, Child) :-
         (append(Prefix, ['_', X, Y, Tile | Suffix], State); append(Prefix, [Tile, X, Y, '_' | Suffix], State)),
         member(Tile, ['B', 'W']),
         member(X, ['B', 'W']),
