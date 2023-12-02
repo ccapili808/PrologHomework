@@ -50,7 +50,7 @@ tilesOutOfPlace(FullList, Tail, CurrentCount, Count) :-
 
 % Time to generate the children of a state, using our valid moves.
 
-generate_children(State, Children) :-
+generateChildren(State, Children) :-
         findall(Child, (valid_move(State, Child), Child \= State), Children).
 
 valid_move(State, Child) :-
@@ -82,26 +82,26 @@ jumpTwo(State, Child) :-
 
 % Test that these work, BBB_WWW should in theory have six children.
 % Test passed: Print children with this command:
-% generate_children(['B', 'B', 'B', '_', 'W', 'W', 'W'], Children), print_children(Children).
+% generateChildren(['B', 'B', 'B', '_', 'W', 'W', 'W'], Children), print_children(Children).
 
 % Next step, Get the heuristic value of each child, choose the smallest and print it. This will be our new state.
 % Repeat this process until we have a heuristic value of 0
 % For tie breaking, just choose any value, won't matter.
 
-find_best_child([Child], Child).
-find_best_child([Child1, Child2 | Rest], BestChild) :-
+getBestChild([Child], Child).
+getBestChild([Child1, Child2 | Rest], BestChild) :-
         sumTilesOutOfPlace(Child1, Heuristic1),
         sumTilesOutOfPlace(Child2, Heuristic2),
         (Heuristic1 =< Heuristic2 -> BetterChild = Child1; BetterChild = Child2),
-        find_best_child([BetterChild | Rest], BestChild).
+        getBestChild([BetterChild | Rest], BestChild).
 
 
 % Recursively call the find best child method, printing the steps we take.
 greedy_search(State) :-
         sumTilesOutOfPlace(State, Heuristic),
         (Heuristic = 0 -> print('Goal State Reached: '), print_list(State);
-        generate_children(State, Children),
-        find_best_child(Children, BestChild),
+        generateChildren(State, Children),
+        getBestChild(Children, BestChild),
         print('Chosen Child: '), print_list(BestChild), nl,
         greedy_search(BestChild)).
 
