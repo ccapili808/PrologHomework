@@ -71,7 +71,103 @@ Approach to the problem / things to define.
             state(west(2,3,true),east(1,0,false))
             state(west(1,3,false),east(2,0,true))
             state(west(3,3,true),east(0,0,false))
-
+--------------------------------------------------
 
 BLACK AND WHITE TILE PROBLEM: 
-// Due next week 
+
+State: 
+    There will always be an array of 7, with three white and black tiles each, ' _ ' for the empty square. 
+    
+    
+    Initial State for this implementation: [B,B,B,_,W,W,W] 
+
+    Goal: 
+    All 'W' should be to the left of 'B', regardless of the position of the empty tile. 
+      [W,W,W,_,B,B,B] and [W,W,W,B,_,B,B] are both valid solutions. 
+
+Methods needed / Notes when I approached the problem: 
+  
+  * predicate for goal state 
+
+  * heuristic: 
+  sum of the number of Black tiles 'B' to the left of each white tile 'W'. 
+  Chose heuristic values which lead us closer to 0, stop when this heursitic is zero. 
+
+
+  * Rules, Identifying children. 
+    Tiles can swap with the empty position in three ways: 
+      swapping when adjacent to the empty tile [B,B,B,_,W,W,W] -> [B,B,_,B,W,W,W] Cost(1) 
+      swapping by hopping over one tile into the empty spot (empty tile swaps after)
+      swapping by hopping over two tiles into the empty spot (empty tile swaps after)
+
+    I got these transitions from the PDF, no tricks were used. 
+
+    When writing this code, I first checked that a state could generate all children correctly, then I made sure that the heuristics matched.
+    
+  
+  * search method: 
+    At our current state, generate all moves (the children), generate each heuristic value for each move (children).
+
+    GREEDY SEARCH, pick the lowest heuristic value, update state to this, repeat the steps until heuristic(State) = 0. 
+
+    Tie Breaking won't matter, a random value is chosen when multiple children have the lowest heuristic value.
+  
+    We have 140 possible states, so brute force is possible, this is why I took a greedy approach. 
+  
+  * a way to print each state that has been visited 
+
+How to Run: 
+
+  - Log into moons or another cs machine, make sure to have my in your directory SlidingTiles.pl file 
+            - Type 'swipl', this will open prolog
+            - Type [SlidingTiles]. to access my prolog file
+            - Type 'start.' to run the method, a path will be printed with the solution 
+            - My assignment defines the initial state and goal states, it does not take inputs in. 
+
+Expected output this is in black-white.txt: *** The initial state is always B B B _ W W W so this shows the path after this. 
+'Chosen Child: 'B B B W _ W W
+
+'Chosen Child: 'B B _ W B W W
+
+'Chosen Child: 'B B W W B _ W
+
+'Chosen Child: 'B B W W B W _
+
+'Chosen Child: 'B B W W _ W B
+
+'Chosen Child: 'B _ W W B W B
+
+'Chosen Child: 'B W _ W B W B
+
+'Chosen Child: '_ W B W B W B
+
+'Chosen Child: 'W W B _ B W B
+
+'Chosen Child: 'W W B W B _ B
+
+'Chosen Child: 'W W _ W B B B
+
+'Goal State Reached: 'W W _ W B B B
+--------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
