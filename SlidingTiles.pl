@@ -1,33 +1,33 @@
-/*
-Example State: 
-There will always be an array of 7, with three white and black tiles each, ' _ ' for the empty square. 
-[B,B,B,_,W,W,W]
 
-Goal: 
-All 'W' should be to the left of 'B', regardless of the position of the empty tile. 
-  [W,W,W,_,B,B,B] and [W,W,W,B,_,B,B] are both valid solutions. 
+% Example State: 
+% There will always be an array of 7, with three white and black tiles each, ' _ ' for the empty square. 
+% [B,B,B,_,W,W,W]
 
-Rules, Identifying children. 
-Tiles can swap with the empty position in three ways: 
-  swapping when adjacent to the empty tile [B,B,B,_,W,W,W] -> [B,B,_,B,W,W,W] Cost(1) 
-  swapping by hopping over one tile (Cost 1)
-  swapping by hopping over two tiles (Cost 2) 
+% Goal: 
+% All 'W' should be to the left of 'B', regardless of the position of the empty tile. 
+%   [W,W,W,_,B,B,B] and [W,W,W,B,_,B,B] are both valid solutions. 
 
-Methods needed: 
+% Rules, Identifying children. 
+% Tiles can swap with the empty position in three ways: 
+%   swapping when adjacent to the empty tile [B,B,B,_,W,W,W] -> [B,B,_,B,W,W,W] Cost(1) 
+%   swapping by hopping over one tile (Cost 1)
+%   swapping by hopping over two tiles (Cost 2) 
+
+% Methods needed: 
   
-predicate for goal state 
+%   predicate for goal state 
 
-heuristic: 
-sum of the number of B tiles to the left of each white tile. 
-Chose heuristic values which lead us closer to 0, stop when this heursitic is zero. 
-We have 140 possible states, so brute force may be possible!
+%   heuristic: 
+%   sum of the number of B tiles to the left of each white tile. 
+%   Chose heuristic values which lead us closer to 0, stop when this heursitic is zero. 
+%   We have 140 possible states, so brute force may be possible!
 
-search method: Greedy Search
+%   search method: Greedy Search
 
-a way to print each state that has been visited 
+%   a way to print each state that has been visited 
 
-deciding which moves are valid
-*/
+%   deciding which moves are valid
+
 
 
 sumTilesOutOfPlace(List, Total) :- sumTilesOutOfPlace(List, List, 0, Total).
